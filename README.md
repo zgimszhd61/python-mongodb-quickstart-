@@ -64,3 +64,91 @@ Citations:
 [6] https://blog.csdn.net/qq_41758969/article/details/125033395
 [7] https://juejin.cn/post/6844903910323257352
 [8] https://jb51.net/article/93975.htm
+
+
+----
+
+要在Python中使用MongoDB，首先需要安装`pymongo`库，这是Python中操作MongoDB的官方驱动。以下是一个快速入门示例，展示了如何连接到MongoDB数据库，创建一个集合，插入文档，查询文档，更新文档，以及删除文档的基本操作。
+
+### 安装PyMongo
+
+首先，确保已经安装了`pymongo`。可以通过以下命令安装：
+
+```bash
+pip install pymongo
+```
+
+### 连接到MongoDB
+
+```python
+from pymongo import MongoClient
+
+# 连接到MongoDB，默认连接到本地数据库
+client = MongoClient('mongodb://localhost:27017/')
+
+# 选择或创建一个数据库，如果不存在将自动创建
+db = client['test_database']
+```
+
+### 创建集合并插入文档
+
+```python
+# 选择或创建一个集合，如果不存在将自动创建
+collection = db['test_collection']
+
+# 插入一个文档
+post = {"author": "John", "text": "My first blog post!", "tags": ["mongodb", "python", "pymongo"]}
+post_id = collection.insert_one(post).inserted_id
+print(f"Inserted post with ID: {post_id}")
+```
+
+### 查询文档
+
+```python
+# 查询单个文档
+print(collection.find_one({"author": "John"}))
+
+# 查询所有文档
+for post in collection.find():
+    print(post)
+```
+
+### 更新文档
+
+```python
+# 更新一个文档
+collection.update_one({"author": "John"}, {"$set": {"text": "My updated blog post!"}})
+print(collection.find_one({"author": "John"}))
+```
+
+### 删除文档
+
+```python
+# 删除一个文档
+collection.delete_one({"author": "John"})
+print(collection.find_one({"author": "John"}))
+```
+
+这个快速入门示例展示了如何在Python中使用`pymongo`库进行基本的MongoDB操作。首先，通过`MongoClient`连接到MongoDB数据库。然后，选择或创建一个数据库和集合。接下来，演示了如何插入、查询、更新和删除文档。这些操作是使用MongoDB进行数据管理的基础[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20]。
+
+Citations:
+[1] https://developer.aliyun.com/article/1084657
+[2] https://juejin.cn/post/6844903597465927694
+[3] https://www.osgeo.cn/mongo-python-driver/tutorial.html
+[4] https://blog.csdn.net/qq_39218530/article/details/108397947
+[5] https://www.yiibai.com/mongodb/mongodb_python.html
+[6] https://cloud.tencent.com/document/product/240/3981
+[7] https://blog.csdn.net/d1240673769/article/details/120353372
+[8] https://www.runoob.com/python3/python-mongodb.html
+[9] https://blog.csdn.net/yudajiangshan/article/details/113034843
+[10] https://developer.mozilla.org/zh-CN/docs/Learn/Server-side/Express_Nodejs/mongoose
+[11] https://fasionchan.com/python/database/mongodb/
+[12] https://juejin.cn/post/6844904150635921422
+[13] https://www.cnblogs.com/wmyskxz/p/10766762.html
+[14] https://cloud.tencent.com/developer/article/1915744
+[15] https://www.cnblogs.com/Can-daydayup/p/16804415.html
+[16] https://www.tencentcloud.com/zh/document/product/240/3981
+[17] https://www.mongodb.com/zh-cn/docs/languages/python/pymongo-arrow-driver/current/quick-start/
+[18] https://www.volcengine.com/theme/6266914-R-7-1
+[19] https://blog.csdn.net/qq_37703224/article/details/135536261
+[20] https://blog.csdn.net/m0_61531676/article/details/126394106
